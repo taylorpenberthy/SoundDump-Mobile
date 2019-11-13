@@ -4,7 +4,7 @@ import { createBottomTabNavigator}from 'react-navigation-tabs'
 import {createAppContainer} from 'react-navigation'
 import HomeScreen from './screens/Home'
 import Search from './screens/Search'
-
+import PlayerScreen from './screens/PlayerScreen'
 export default class App extends Component {
   
   render() {
@@ -18,6 +18,9 @@ const AppNavigator = createBottomTabNavigator({
   },
   Search: {
     screen: Search
+  },
+  PlayerScreen: {
+    screen: PlayerScreen
   }
 },
 {
