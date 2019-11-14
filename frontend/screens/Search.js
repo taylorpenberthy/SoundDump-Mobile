@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { AuthSession } from 'expo';
 import { FontAwesome } from '@expo/vector-icons';
-const CLIENT_ID = 'ad1c012acdaf423399f7c953f0bfe0f4';
+const CLIENT_ID = '3382c1524f104049b472c27005eccffa';
 import axios from 'axios';
+
 export default class Search extends Component {
     state = {
       userInfo: null,
@@ -17,8 +18,7 @@ export default class Search extends Component {
     if (results.type !== 'success') {
       this.setState({ didError: true });
     } else {
-      const userInfo = await fetch(`https://accounts.spotify.com/api/token`, {
-          method: 'POST',
+      const userInfo = await axios.get(`https://api.spotify.com/v1/me`, {
           headers: {
             Authorization: `Bearer ${results.params.access_token}`
         }

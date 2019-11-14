@@ -32,20 +32,23 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'oauth2_provider',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'rest_framework.authtoken',
     'rest_framework',
+    'rest_auth',
+    'django.contrib.sites',
     'sound',
 ]
 
-CORS_ALLOW_HEADERS = (
-    'x-csrftoken',
-)
 
+
+SITE_ID = 1
 # CORS_ORIGIN_WHITELIST = (
 #     'http://localhost:3000',
 #     'http://localhost:8000',
@@ -67,11 +70,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
-       
-    ]
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
+
 ROOT_URLCONF = 'sound_dump.urls'
 
 TEMPLATES = [
@@ -106,7 +115,9 @@ DATABASES = {
     }
 }
 
-
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'sound_dump.utils.my_jwt_response_handler'
+}
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

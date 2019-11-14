@@ -13,6 +13,9 @@ djangorestframework-jwt = "*"
 django-cors-headers = "*"
 requests = "*"
 spotipy = "*"
+django-rest-auth = "*"
+django-allauth = "*"
+django-oauth-toolkit = "*"
 
 [requires]
 python_version = "3.7"
