@@ -6,7 +6,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { ActivityIndicator } from 'react-native'
-import { faRecordVinyl, faUserCircle, faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
+import { faRecordVinyl, faUserCircle, faPlaneDeparture, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 
 
@@ -17,7 +17,7 @@ export default class Home extends Component {
     this.state = {
       posts: [],
       fontsLoaded: false,
-      token: this.props.token
+      token: AsyncStorage.getItem('token')
     };
   }
 
@@ -65,9 +65,11 @@ export default class Home extends Component {
 
   
   render() {
+    console.log(this.state)
    return(
+     
       <View style={{ flex: 1, paddingTop: 60, }}>
-      
+      <FontAwesomeIcon icon={faPlusSquare} color={'rgb(231, 210, 141)'} size={28} marginLeft={350} onPress={() => this.props.navigation.navigate('PlayerScreen')}/>
         <Text style={styles.sounddump}>S<FontAwesomeIcon icon={ faRecordVinyl } color={'rgb(231, 210, 141)'} size={32} />undDump</Text>
       
         <FlatList

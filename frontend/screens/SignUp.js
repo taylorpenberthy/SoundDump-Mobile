@@ -3,7 +3,7 @@ import axios from 'axios'
 import Home from './Home'
 import { StyleSheet, Text, View, TextInput, Button, AsyncStorage} from 'react-native'
 import App from '../App'
-import SignUp from './SignUp'
+
 export default class LoginForm extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +15,7 @@ export default class LoginForm extends Component {
     }
 
     handleSubmit = () => {
-        return axios.post('http://localhost:8000/api/auth-jwt/', {
+        return axios.post('http://localhost:8000/api/auth/users/', {
             'username': this.state.username,
             'password': this.state.password
         }, {
@@ -23,14 +23,15 @@ export default class LoginForm extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-           AsyncStorage.setItem('token', res.data.token)
-            this.setState({
-                username: res.data.user.username,
-                loggedIn: true,
-                token: res.data.token
-            })
-            this.props.navigation.navigate('App')
-           })
+          return res.json()})
+          .then(json => {
+              AsyncStorage.setItem('token', json.token)
+              this.setState({
+                  loggedIn: true,
+                  username: json.username
+              })
+          })
+            
         }
         
     
@@ -49,11 +50,8 @@ export default class LoginForm extends Component {
                     name='password'
                     onChangeText={(text) => this.setState({password: text})}/>
                </View>
-               <Button title="Log In" style={styles.submitButtonText} onPress={() => this.handleSubmit()}/>
-               <Button
-          title="Go to Signup"
-          onPress={() => this.props.navigation.navigate('SignUp')}
-        />
+               <Button title="Sign Up" style={styles.submitButtonText} onPress={() => this.handleSubmit()}/>
+               <Button title='Log in' style={styles.submitButtonText} onPress={() => this.props.navigation.navigate('Login')}/>
                </View>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import axios from 'axios'
-import { Text, Button, TextInput, View, StyleSheet, TouchableOpacity, FormData} from 'react-native'
+import { Text, Button, TextInput, View, StyleSheet, TouchableOpacity, FormData, AsyncStorage} from 'react-native'
 import qs from 'qs'
 import { ScrollView } from 'react-native-gesture-handler'
 
@@ -13,11 +13,16 @@ export default class NewPost extends Component {
         this.state = {
             title: '',
             link: '',
-            caption: ''
+            caption: '',
+            token: ''
             
         }
     }
+    componentDidMount = async()=>{
+       const token = await AsyncStorage.getItem('token')
+       this.state.token = token
 
+    }
    refreshList = () => {
        axios.get("http://localhost:8000/api/posts/")
        .then(res => {
@@ -38,7 +43,8 @@ export default class NewPost extends Component {
             'caption': this.state.caption
         }, {
             "headers": {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${this.state.token}`
             }
         })
         .then(res => 

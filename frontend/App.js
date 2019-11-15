@@ -6,61 +6,64 @@ import HomeScreen from './screens/Home'
 import {AsyncStorage} from 'react-native';
 import PlayerScreen from './screens/PlayerScreen'
 import EditPost from './screens/EditPost'
-
+import AppContainer from './navigation'
 import LoginForm from './screens/LoginForm'
 export default class App extends Component {
   
-
-  constructor() {
-    super()
-    this.state = {
-      loggedIn: false,
-      username: '',
-    
-    }
-  }
-
-  
   render() {
     return <AppContainer />
-    if (this.state.loggedIn) {
-        return <AppContainer />
-      // return  <AppContainer />
-    }
-    else {
-      return <LoginForm />
-    }
-    }
   }
+}
+//   constructor() {
+//     super()
+//     this.state = {
+//       loggedIn: false,
+//       username: '',
+    
+//     }
+//   }
 
-const AppNavigator = createBottomTabNavigator({
-  Home: {
-    screen: HomeScreen
-  },
- 
-  New: {
-    screen: PlayerScreen
-  },
-  Edit: {
-    screen: EditPost
-  },
-  Login: {
-    screen: LoginForm
-  }
   
-},
-{
-  initialRouteName: 'Home'
-})
+//   render() {
+//     return <AppContainer />
+//     if (this.state.loggedIn) {
+//         return <AppContainer />
+//       // return  <AppContainer />
+//     }
+//     else {
+//       return <LoginForm />
+//     }
+//     }
+//   }
 
-const AppContainer = createAppContainer(AppNavigator)
+// const AppNavigator = createBottomTabNavigator({
+//   Home: {
+//     screen: HomeScreen
+//   },
+ 
+//   New: {
+//     screen: PlayerScreen
+//   },
+//   Edit: {
+//     screen: EditPost
+//   },
+//   Login: {
+//     screen: LoginForm
+//   }
+  
+// },
+// {
+//   initialRouteName: 'Home'
+// })
+
+// const AppContainer = createAppContainer(AppNavigator)
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
    
-  },
-});
+//   },
+// })
