@@ -5,8 +5,9 @@ import * as Font  from 'expo-font'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import Signup from './SignUp';
 import { ActivityIndicator } from 'react-native'
-import { faRecordVinyl, faUserCircle, faPlaneDeparture, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import { faRecordVinyl, faUserCircle, faPlaneDeparture, faPlusSquare, faCoffee,faCocktail, faCloudShowersHeavy, faFire, faLaughBeam } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 
 
@@ -17,6 +18,7 @@ export default class Home extends Component {
     this.state = {
       posts: [],
       fontsLoaded: false,
+      loggedIn: true,
       token: AsyncStorage.getItem('token')
     };
   }
@@ -62,35 +64,56 @@ export default class Home extends Component {
 
   })
   }
-
+  handlelogout = () => {
+    AsyncStorage.removeItem('token')
+    this.setState({
+      loggedIn: false
+    })
+    this.props.navigation.navigate('Login')
+  }
   
   render() {
-    console.log(this.state)
+    this.state.posts.map(item=> {
+      if (item.vibe === 'chill') {
+        item.vibe = <FontAwesomeIcon icon={faCoffee} color={'#D1ABAD'} size={25}/>
+      }else if (item.vibe === 'sensual') {
+        item.vibe = <FontAwesomeIcon icon={faFire} color={'red'} size={25}/>
+      }else if (item.vibe === 'moody') {
+        item.vibe = <FontAwesomeIcon icon={faCloudShowersHeavy} color={'grey'} size={25} fontWeight/>
+      }else if (item.vibe === 'party') {
+        item.vibe = <FontAwesomeIcon icon={faCocktail} color={'#CEBACF'} size={25}/>
+      }else if (item.vibe === 'upbeat') {
+        item.vibe = <FontAwesomeIcon icon={faLaughBeam} color={'#4BC6B9'} size={25}/>
+      }else {
+        item.vibe = <FontAwesomeIcon icon={faPlaneDeparture} color={'#7B0828'} size={25}/>
+      }
+    })
+    
    return(
      
-      <View style={{ flex: 1, paddingTop: 60, }}>
-      <FontAwesomeIcon icon={faPlusSquare} color={'rgb(231, 210, 141)'} size={28} marginLeft={350} onPress={() => this.props.navigation.navigate('PlayerScreen')}/>
+      <View style={{ flex: 1, paddingTop: 20, backgroundColor: '#fbf7f5' }}>
+       <Button title="SignUp" onPress={() => this.props.navigation.navigate('SignUp')}/>
+      <FontAwesomeIcon icon={faPlusSquare} color={'rgb(231, 210, 141)'} size={28} marginLeft={370} onPress={() => {this.props.navigation.navigate('PlayerScreen')}}/>
+      {/* <Button style={styles.button} title="Logout"  onPress={() => this.handlelogout()}/> */}
         <Text style={styles.sounddump}>S<FontAwesomeIcon icon={ faRecordVinyl } color={'rgb(231, 210, 141)'} size={32} />undDump</Text>
+        
       
         <FlatList
           data={this.state.posts}
           keyExtractor={({item} , index) => index.toString()}
           renderItem={({ item }) => (
             <View style={styles.post} >
-              <Text style={{textAlign: 'center', alignSelf: 'stretch', marginBottom: 10, fontFamily: 'shrikhand', fontSize: 20, color: '#CB8589'}}>{item.title}</Text>
-           {/* <FontAwesomeIcon icon={ faPlaneDeparture } color={'rgb(231, 60, 201)'} size={30} paddingBottom={0} textAlign={'right'}/>
-               */}
-              {/* <Text style={styles.title}>{item.title} </Text> */}
+              <Text style={{textAlign: 'center', alignSelf: 'stretch', marginBottom: 10, fontFamily: 'shrikhand', fontSize: 20, color: '#CB8589'}}>{item.title} {item.vibe} </Text>
               <ImageBackground source={require('../assets/vinyl.png')} style={{width: 400, height: 400, marginLeft: 7, marginBottom: 20}}>
              <TouchableOpacity onPress={() => Linking.openURL(item.caption)}>
            <Image source={{ uri: `${item.link}`}} style={styles.album}  /></TouchableOpacity>
-           {/* <Text style={styles.buttons}>User: jdklsfjlsdkjflks</Text> */}
+           
            </ImageBackground>
           <FontAwesomeIcon icon={ faUserCircle } color={'rgb(131, 167, 222)'} size={30} paddingBottom={0} textAlign={'center'} marginLeft={190}/> 
-          <Text style={{textAlign: 'center', alignSelf: 'stretch', marginBottom: 80, fontFamily: 'shrikhand',  color: '#83A7DE',fontSize: 20}}>username</Text>
-           
-            {/* <Text style={{color: 'rgb(131, 167, 222)', padding: 10, borderRadius: 300,}} onPress={() => Linking.openURL(item.caption)}>Open in Spotify</Text> */}
+          <Text style={{textAlign: 'center', alignSelf: 'stretch', marginBottom: 40, fontFamily: 'shrikhand',  color: '#83A7DE',fontSize: 20}}>{item.author.username}</Text>
+         
             <View style={styles.buttons}>
+             
              {/* <Button color='rgb(131, 167, 222)' title="Delete" onPress={() => this.deletePost(item.pk)}/>
              <Button color='rgb(131, 167, 222)' title="Edit" onPress={() => this.props.navigation.navigate('Edit')}/> */}
             {/* <FontAwesomeIcon icon={ faRecordVinyl } color={'rgb(131, 167, 222)'} size={32}/> */}
@@ -135,7 +158,12 @@ const styles = StyleSheet.create({
     margin: 10
   },
   button: {
-      paddingTop: 20
+      left: 0,
+      top: 0,
+      textAlign: 'left',
+      marginLeft: 0,
+      marginRight: 250,
+      paddingRight: 200
   },
   album: {
     width: 250, 
@@ -146,33 +174,13 @@ const styles = StyleSheet.create({
    marginRight: 100
 
   },
-  // post: {
-  //   flex: 1,
-  //   borderWidth: 0.5,
-  //   margin: 10,
-  //   textAlign: 'center',
-  //   paddingTop: 65,
-  //   // width: 400,
-  //   // height: 400,
-  //   // borderRadius: 400/2,
-  //   // padding: 2,
-  //   // backgroundColor: '#E3E1E1',
-  //   // backgroundColor: 'rgba(254, 242, 219, 0.8)',
-  //   shadowColor: 'darkgrey',
-  //   shadowOffset: { width: 0, height: 2 },
-  //   shadowOpacity: 0.8,
-  //   shadowRadius: 2,
-  //   elevation: 1,
-  //   borderColor: '#E3E1E1',
-  //   alignItems: 'center'
-  // },
   sounddump: {
     fontSize: 40,
     // fontFamily: 'shrikhand',
     textAlign: 'center',
     // color: 'rgb(197, 139, 211)',
     color: 'rgb(131, 167, 222)',
-    paddingBottom: 20
+    paddingBottom: 40
   },
  
 });

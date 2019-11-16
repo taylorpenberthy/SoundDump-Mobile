@@ -30,6 +30,7 @@ export default class LoginForm extends Component {
                   loggedIn: true,
                   username: json.username
               })
+              this.props.navigation.navigate('Login')
           })
             
         }

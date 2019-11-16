@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Text, Button, TextInput, View, StyleSheet, TouchableOpacity, FormData, AsyncStorage} from 'react-native'
 import qs from 'qs'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import { Dropdown } from 'react-native-material-dropdown'
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
@@ -14,13 +14,17 @@ export default class NewPost extends Component {
             title: '',
             link: '',
             caption: '',
-            token: ''
+            vibe: '',
+            author: AsyncStorage.getItem('username'),
+            token: AsyncStorage.getItem('token')
             
         }
     }
     componentDidMount = async()=>{
        const token = await AsyncStorage.getItem('token')
        this.state.token = token
+       console.log(this.state.token)
+       
 
     }
    refreshList = () => {
@@ -37,10 +41,12 @@ export default class NewPost extends Component {
         // e.preventDefault()
         let posts = this.state
         return axios.post('http://localhost:8000/api/posts/', {
-
             'title': this.state.title,
             'link': this.state.link,
-            'caption': this.state.caption
+            'caption': this.state.caption,
+            'vibe': this.state.vibe,
+            'author': this.state.author
+           
         }, {
             "headers": {
                 'Content-Type': 'application/json',
@@ -55,7 +61,22 @@ export default class NewPost extends Component {
     }
 
     render() {
-        
+        let data = [{
+            value: 'moody'
+        },
+        {
+            value: 'chill'
+        },
+        {
+            value: 'sensual'
+        },
+        {
+            value: 'party'
+        },
+        {
+            value: 'upbeat'
+        }
+    ]
         return( 
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
@@ -76,6 +97,14 @@ export default class NewPost extends Component {
                     name='caption'
                     onChangeText={(text) => this.setState({caption: text})}/>
                </View>
+               <View style={styles.inputContainer}>
+               <Dropdown
+               label='Vibe'
+               data={data}
+               onChangeText={(text) => this.setState({vibe: text})}/>
+               </View>
+               
+              
                {/* <View style={styles.inputContainer}>
                     <TextInput style={StyleSheet.inputs}
                     placeholder="Comments"

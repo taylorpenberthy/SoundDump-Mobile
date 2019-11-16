@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Home from './Home'
-import { StyleSheet, Text, View, TextInput, Button, AsyncStorage} from 'react-native'
+import { StyleSheet, Text, View, TextInput, Button, AsyncStorage, Alert} from 'react-native'
 import App from '../App'
 import SignUp from './SignUp'
 export default class LoginForm extends Component {
@@ -23,17 +23,20 @@ export default class LoginForm extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
+            console.log(res)
            AsyncStorage.setItem('token', res.data.token)
+           AsyncStorage.setItem('username', res.data.user.username)
             this.setState({
                 username: res.data.user.username,
                 loggedIn: true,
                 token: res.data.token
             })
             this.props.navigation.navigate('App')
-           })
         }
-        
-    
+        )
+
+        }
+
     render() {
         return(
             <View style={styles.container}>
@@ -46,6 +49,7 @@ export default class LoginForm extends Component {
                <View style={styles.inputContainer}>
                     <TextInput style={StyleSheet.inputs}
                     placeholder="password"
+                    secureTextEntry
                     name='password'
                     onChangeText={(text) => this.setState({password: text})}/>
                </View>
