@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient;
 
 // Needed for `react-native link`
 // import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.horcrux.svg.SvgPackage;
 import com.spotify.sdk.android.authentication.RNSpotifyPackage;
@@ -36,6 +37,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
 
         // Needed for `react-native link`
         // new MainReactPackage(),
+            new VectorIconsPackage(),
             new AsyncStoragePackage(),
             new SvgPackage(),
             new RNSpotifyPackage(),

@@ -35,7 +35,7 @@ class UserList(APIView):
 class PostView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     def get_queryset(self):
         author = self.request.user
         return Post.objects.all()

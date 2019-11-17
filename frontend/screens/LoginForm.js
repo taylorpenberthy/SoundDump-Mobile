@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Home from './Home'
-import { StyleSheet, Text, View, TextInput, Button, AsyncStorage, Alert} from 'react-native'
+import { StyleSheet, Text, View, TextInput, Button, AsyncStorage, Image} from 'react-native'
 import App from '../App'
+import sounddump from '../assets/sounddump.png'
 import SignUp from './SignUp'
 export default class LoginForm extends Component {
     constructor(props) {
@@ -39,7 +40,11 @@ export default class LoginForm extends Component {
 
     render() {
         return(
+           
             <View style={styles.container}>
+                 <View style={styles.header}>
+                <Image source={sounddump} style={styles.sounddump}/>
+            </View>
                 <View style={styles.inputContainer}>
                     <TextInput style={StyleSheet.inputs}
                     placeholder="username"
@@ -68,6 +73,7 @@ const styles = StyleSheet.create({
        flex: 1,
        justifyContent: 'center',
        alignItems: 'center',
+       backgroundColor: '#fbf7f5'
     },
     input: {
        margin: 15,
@@ -104,6 +110,11 @@ const styles = StyleSheet.create({
       marginBottom:20,
       flexDirection: 'row',
       alignItems:'center'
+   },
+   sounddump: {
+       marginLeft: 100,
+       marginRight: 20,
+       height: 300
    },
    inputs:{
       height:45,

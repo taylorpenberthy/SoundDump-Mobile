@@ -24,6 +24,7 @@ export default class NewPost extends Component {
       link: '',
       caption: '',
       vibe: '',
+      artist: '',
       token: AsyncStorage.getItem('token')
     };
   }
@@ -62,7 +63,9 @@ export default class NewPost extends Component {
             title: this.state.title,
             link: this.state.link,
             caption: this.state.caption,
-            vibe: this.state.vibe
+            artist: this.state.artist,
+            vibe: this.state.vibe,
+           
           },
           {
             headers: {
@@ -109,6 +112,14 @@ export default class NewPost extends Component {
         <View style={styles.inputContainer}>
           <TextInput
             style={StyleSheet.inputs}
+            placeholder='Artist'
+            name='artist'
+            onChangeText={text => this.setState({ artist: text })}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={StyleSheet.inputs}
             placeholder='Image'
             name='link'
             onChangeText={text => this.setState({ link: text })}
@@ -125,6 +136,7 @@ export default class NewPost extends Component {
         <View style={styles.inputContainer}>
           <Dropdown
             label='Vibe'
+            padding={50}
             data={data}
             onChangeText={text => this.setState({ vibe: text })}
           />
@@ -150,7 +162,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#fbf7f5'
   },
   input: {
     margin: 15,

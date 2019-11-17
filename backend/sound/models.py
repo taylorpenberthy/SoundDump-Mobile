@@ -19,6 +19,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     link = models.TextField()
     caption = models.TextField()
+    artist = models.CharField(max_length=100)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
     vibe = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     def __str__(self):
