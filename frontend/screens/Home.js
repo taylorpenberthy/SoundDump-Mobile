@@ -110,7 +110,7 @@ export default class Home extends Component {
            
            </ImageBackground>
           <FontAwesomeIcon icon={ faUserCircle } color={'rgb(131, 167, 222)'} size={30} paddingBottom={0} textAlign={'center'} marginLeft={190}/> 
-          <Text style={{textAlign: 'center', alignSelf: 'stretch', marginBottom: 40, fontFamily: 'shrikhand',  color: '#83A7DE',fontSize: 20}}>{item.author.username}</Text>
+          <Text style={{textAlign: 'center', alignSelf: 'stretch', marginBottom: 40, fontFamily: 'shrikhand',  color: '#83A7DE',fontSize: 20}}>{item.author}</Text>
          
             <View style={styles.buttons}>
              
