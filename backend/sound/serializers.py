@@ -4,11 +4,12 @@ from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
 
+class UserSerializer(serializers.ModelSerializer):
+   
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('id', 'username', 'posts')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -37,21 +38,26 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         fields = ('token', 'username', 'password')
 
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='post_detail')
+class PostSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(many=False)
     
     class Meta:
         model = Post
-        fields = ['pk','title', 'link', 'caption', 'url', ]
+        fields = ['pk','title', 'link', 'caption', 'vibe', 
+        'author' ]
+    def create(self, validated_data):
+       
+        return Post.objects.create(**validated_data)
     
 
 class PostDetailSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Post
         fields = ['pk', 'title', 'link', 'caption', 'url']
     
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
-   
+    
     class Meta:
         model = Comment
         fields = ['pk','body', 'post']

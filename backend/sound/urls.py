@@ -8,7 +8,7 @@ urlpatterns = [
     path('auth/current_user/', views.current_user),
     path('auth/users/', views.UserList.as_view()),
     path('posts/<int:pk>/', views.PostDetail.as_view(), name='post_detail'),
-    path('posts/', views.PostView.as_view(), name='posts'),
+    path('posts/', views.PostView.as_view(), name='user-detail'),
     path('comments/', views.CommentList.as_view(), name='comments'),
     path('auth-jwt/', obtain_jwt_token),
     path('auth-jwt-refresh/', refresh_jwt_token),

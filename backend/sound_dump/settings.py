@@ -100,7 +100,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sound_dump.wsgi.application'
-
+ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -114,6 +114,10 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+
+
+
+
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'sound_dump.utils.my_jwt_response_handler'

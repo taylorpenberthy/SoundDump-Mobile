@@ -22,23 +22,27 @@ def current_user(request):
 
 
 class UserList(APIView):
-    """
-    Create a new user. It's called 'UserList' because normally we'd have a get
-    method here too, for retrieving a list of all User objects.
-    """
-
+    queryset = User.objects.all()
     permission_classes = (permissions.AllowAny,)
-
+    # lookup_field = 'user-detail'
     def post(self, request, format=None):
         serializer = UserSerializerWithToken(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
 class PostView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    def get_queryset(self):
+        author = self.request.user
+        return Post.objects.all()
+        # return Post.objects.filter(author=author.id)
+    def perform_create(self, serializer):
+       
+        serializer.save(author=self.request.user)
 
 
 class CommentList(generics.ListCreateAPIView):
@@ -46,13 +50,15 @@ class CommentList(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
 
 class PostCreate(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated, DjangoModelPermissions)
+    queryset = Post.objects.all()
+    permission_classes = (IsAuthenticated, )
 
     def perform_create(self, serializer):
         
-        serializer.save()
+        serializer.save(author_id=self.request.user)
+        
+   
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
