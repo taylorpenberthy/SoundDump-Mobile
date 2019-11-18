@@ -52,9 +52,9 @@ export default class NewPost extends Component {
           this.setState({ posts: response });
         });
     };
-    handleSubmit = (e) => {
+    handleSubmit = e => {
       console.log(this.state.author);
-      e.preventDefault()
+      e.preventDefault();
       let posts = this.state;
       return axios
         .post(
@@ -64,8 +64,7 @@ export default class NewPost extends Component {
             link: this.state.link,
             caption: this.state.caption,
             artist: this.state.artist,
-            vibe: this.state.vibe,
-           
+            vibe: this.state.vibe
           },
           {
             headers: {
@@ -75,8 +74,9 @@ export default class NewPost extends Component {
           }
         )
         .then(res => {
-            console.log(res)
-        this.props.navigation.navigate('Home')})
+          console.log(res);
+          this.props.navigation.navigate('Home');
+        })
         .catch(err => console.log(err));
     };
   };
@@ -151,7 +151,7 @@ export default class NewPost extends Component {
         <Button
           title='Post'
           style={styles.submitButtonText}
-          onPress={(event) => handleSubmit(event)}
+          onPress={event => handleSubmit(event)}
         />
       </View>
     );

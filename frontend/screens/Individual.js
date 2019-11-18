@@ -114,10 +114,14 @@ export default class Individual extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fbf7f5' }}>
-        
-        <Image source={vinyl} style={styles.sounddump} onPress={() => {this.props.navigation.navigate('Home')}} />
-
+        <TouchableOpacity style={styles.sounddump} onPress={() => this.props.navigation.navigate('Home')} >
+        <Image source={vinyl} style={styles.sounddump} />
+        </TouchableOpacity>
+        <View style={styles.songdeet}>
         <Text style={styles.title}>{post.title}</Text>
+
+        <Text style={styles.artist}>{post.artist}</Text>
+        </View>
         <View style={styles.post}>
                   
         
@@ -213,6 +217,14 @@ const styles = StyleSheet.create({
       shadowRadius: 3,
       shadowOffset: {width: 0, height: 0}
     },
+    artist: {
+        color: 'rgb(197, 139,211)',
+        justifyContent: 'center',
+        fontSize: 15,
+        fontFamily: 'shrikhand',
+        textAlign: 'center',
+        paddingBottom: 0,
+    },
     userinfo: {
       flex: 1,
       marginTop: 10,
@@ -239,21 +251,27 @@ const styles = StyleSheet.create({
       color: '#83A7DE',
       fontSize: 18
     },
-    title: {
+    songdeet: {
+        color: 'rgb(197, 139,211)',
+        justifyContent: 'center',
+        flex: 1
+    },
+    title:  {
       flex: 1,
+      height: 20,
       zIndex: 6,
   
     //   backgroundColor: 'black',
       // backgroundColor: 'rgb(253, 190, 219)',
       color: 'rgb(197, 139,211)',
       justifyContent: 'center',
-      fontSize: 35,
+      fontSize: 25,
       fontFamily: 'shrikhand',
       textAlign: 'center',
       marginTop: 0,
       paddingBottom: 0,
-      height: 20,
-      resizeMode: 'contain'
+    //   height: 40,
+    //   resizeMode: 'contain'
     },
     button: {
       left: 0,
@@ -274,9 +292,9 @@ const styles = StyleSheet.create({
     sounddump: {
         height: 40,
         width: 40,
+        marginLeft: 92,
         flex: 1,
         resizeMode: 'contain',
-        marginLeft:350,
     
       // color: 'rgb(197, 139, 211)',
      
