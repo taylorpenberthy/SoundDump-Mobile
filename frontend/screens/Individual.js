@@ -25,6 +25,7 @@ import {
     faCloudShowersHeavy,
     faFireAlt,
     faLaughBeam,
+    faEdit,
     faTrash
   } from '@fortawesome/free-solid-svg-icons';
 import * as Font from 'expo-font';
@@ -131,9 +132,8 @@ export default class Individual extends Component {
         <View style={styles.post}>
         <Text style={styles.title}>{post.title}</Text>
 
-<Text style={styles.artist}>{post.title}
-
-{post.artist}</Text>
+<Text style={styles.artist}>{post.title}</Text>
+<Text style={styles.artist}>{post.artist}</Text>
         
             <ImageBackground
                 source={require('../assets/vinyl.png')}
@@ -170,6 +170,12 @@ export default class Individual extends Component {
                   flex={1}
                   color={'rgb(131, 167, 222)'}
                 />
+                <FontAwesomeIcon onPress={() => this.editPost(post.pk)}
+                icon={ faEdit}
+                size={24}
+                flex={1}
+                flexDirection={'row'}
+                color={'rgb(131, 167, 222)'}/>
                   </Text> 
                  {/* <Text style={styles.vibe}>{post.vibe}</Text> */}
             

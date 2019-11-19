@@ -9,7 +9,8 @@ import {
   Linking,
   TouchableOpacity,
   ImageBackground,
-  AsyncStorage
+  AsyncStorage,
+  RefreshControl
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import * as Font from 'expo-font';
@@ -49,6 +50,7 @@ export default class Home extends Component {
     this.state = {
       posts: [],
       fontsLoaded: false,
+      refreshing: true,
       loggedIn: true,
       token: AsyncStorage.getItem('token')
     };
@@ -71,10 +73,19 @@ export default class Home extends Component {
         return res.json();
       })
       .then(response => {
-        this.setState({ posts: response });
+        this.setState({ posts: response,
+        refreshing: false });
       });
   };
-
+  onRefresh() {
+    this.setState({posts: []})
+    return fetch('http://localhost:8000/api/posts/').then(res => {
+      return res.json();
+    })
+    .then(response => {
+      this.setState({ posts: response,
+      refreshing: false });
+  })}
   deletePost = post => {
     return axios
       .delete(`http://localhost:8000/api/posts/${post}/`, {
@@ -186,6 +197,9 @@ export default class Home extends Component {
         </View>
         <FlatList
           data={this.state.posts}
+          refreshControl={
+            <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)}/>
+          }
           keyExtractor={({ item }, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={styles.post}>
@@ -362,8 +376,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 30,
     marginRight: 50,
-    // color: 'rgb(197, 139, 211)',
-    color: 'rgb(131, 167, 222)',
     paddingBottom: 50
   }
 });

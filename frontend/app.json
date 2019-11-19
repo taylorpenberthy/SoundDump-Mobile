@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "soundDump",
+    "icon": "./assets/vinyl.png",
     "slug": "frontend",
     "privacy": "public",
     "sdkVersion": "35.0.0",
