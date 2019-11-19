@@ -16,6 +16,9 @@ spotipy = "*"
 django-rest-auth = "*"
 django-allauth = "*"
 django-oauth-toolkit = "*"
+whitenoise = "*"
+gunicorn = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"

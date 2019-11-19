@@ -74,11 +74,9 @@ export default class Search extends Component {
           source={ {'uri': this.state.userInfo.images[0].url} }
         />
         <View>
+         
           <Text style={styles.userInfoText}>
-            Username:
-          </Text>
-          <Text style={styles.userInfoText}>
-            {this.state.userInfo.id}
+            {this.state.userInfo.display_name}
           </Text>
           </View>
         </View>

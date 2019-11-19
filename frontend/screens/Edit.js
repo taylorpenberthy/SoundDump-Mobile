@@ -19,7 +19,7 @@ export default class NewPost extends Component {
   constructor() {
     super();
     this.state = {
-      pk: this.props.navigation.state
+      pk: this.props.navigation.state.params
     };
   }
 

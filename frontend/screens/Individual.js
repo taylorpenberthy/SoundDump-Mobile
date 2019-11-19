@@ -11,6 +11,7 @@ import { StyleSheet,
     ImageBackground,
     AsyncStorage } from 'react-native';
 import Home from '../screens/Home'
+import Edit from '../screens/Edit'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
     faRecordVinyl,
@@ -83,6 +84,7 @@ export default class Individual extends Component {
         });
       });
   };
+  
   render() {
     let post = this.state.post
     if (post.vibe === 'chill') {
@@ -119,7 +121,7 @@ export default class Individual extends Component {
           />
         );
       }
-
+   
     return (
       <View style={{ flex: 1, backgroundColor: '#fbf7f5' }}>
            <Button style={styles.button} title="Logout"  onPress={() => this.handlelogout()}/>
@@ -169,14 +171,8 @@ export default class Individual extends Component {
                   size={24}
                   flex={1}
                   color={'rgb(131, 167, 222)'}
-                />
-                <FontAwesomeIcon onPress={() => this.editPost(post.pk)}
-                icon={ faEdit}
-                size={24}
-                flex={1}
-                flexDirection={'row'}
-                color={'rgb(131, 167, 222)'}/>
-                  </Text> 
+                />   </Text> 
+                
                  {/* <Text style={styles.vibe}>{post.vibe}</Text> */}
             
     
@@ -250,7 +246,7 @@ const styles = StyleSheet.create({
     bottomstuff: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     },
     buttons: {
       flex: 1,
@@ -290,6 +286,8 @@ const styles = StyleSheet.create({
       left: 0,
       top: 0,
       textAlign: 'left',
+      flex: 1,
+      flexDirection: 'row',
       marginLeft: 0,
       marginRight: 250,
       paddingRight: 200
@@ -306,6 +304,7 @@ const styles = StyleSheet.create({
         height: 40,
         width: 40,
         marginLeft: 92,
+        flexDirection: 'row',
         flex: 1,
         resizeMode: 'contain',
     

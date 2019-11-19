@@ -1,0 +1,6 @@
+1. As a SoundDump User, I want to sign in/sign up to the app, so I can attach my account to my posts and share music.
+2. As a SoundDump User, I want to sign in via Spotify to access their data.
+3.  As a SoundDump User, I want to be able to search Spotify to generate a post based on a song title.
+4. As a SoundDump User, I want to be able to create and delete posts, so I have control over what I share with my friends.
+5. As a SoundDump User, I would like to hear a 30 second preview of the post, so that I don't have to go and look it up myself.
+6. As a SoundDump User, I would like a link to the song URL, so that I don't have to find where the song exists in the world.

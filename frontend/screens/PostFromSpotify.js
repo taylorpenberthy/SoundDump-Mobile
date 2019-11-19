@@ -26,11 +26,10 @@ export default class PostFromSpotify extends Component {
     };
   }
   componentDidMount = async () => {
-      console.log('spotify credent' + spotifyCredentials)
+
     let spotToken = await AsyncStorage.getItem('spottoken');
     const token = await AsyncStorage.getItem('token');
 
-    console.log(this.state.id);
     axios
       .get(`https://api.spotify.com/v1/tracks/${this.state.id}`, {
         headers: {
@@ -50,9 +49,7 @@ export default class PostFromSpotify extends Component {
       });
   };
   handleSubmit = event => {
-    console.log(this.state.artist);
-
-    console.log(this.state.token);
+    
     event.preventDefault();
     return axios
       .post(
@@ -60,7 +57,7 @@ export default class PostFromSpotify extends Component {
         {
           title: this.state.title,
           link: this.state.image,
-          caption: this.state.linktosong,
+          caption: this.state.song_preview,
           artist: this.state.artist,
           vibe: this.state.vibe
         },
