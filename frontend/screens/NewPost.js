@@ -81,34 +81,34 @@ export default class NewPost extends Component {
         .catch(err => console.log(err));
     };
   };
-  searchSpotify = async(search) => {
-    console.log('search' + search)
-    this.state.songs = []
-    let spotToken = await AsyncStorage.getItem('spottoken')
-    console.log('spt token' + spotToken)
-    axios.get(`https://api.spotify.com/v1/search?q=${search}&type=track&limit=3`, {
-          headers: {
-            Authorization: `Bearer ${spotToken}`
+  searchSpotify = async search => {
+    console.log('search' + search);
+    this.state.songs = [];
+    let spotToken = await AsyncStorage.getItem('spottoken');
+    console.log('spt token' + spotToken);
+    axios
+      .get(`https://api.spotify.com/v1/search?q=${search}&type=track&limit=3`, {
+        headers: {
+          Authorization: `Bearer ${spotToken}`
         }
-      }).then(res => {return res.data.tracks.items})
+      })
+      .then(res => {
+        return res.data.tracks.items;
+      })
       .then(response => {
-       
         response.map(song => {
-          
-      
           this.setState({
             songs: song.name
-          })
-          console.log(song.name)
-          console.log(song.id)
-        })
-      })
-  }
-  autofillinputs = (e) => {
-    console.log('e' + e)
-    axios.get()
-  
-  }
+          });
+          console.log(song.name);
+          console.log(song.id);
+        });
+      });
+  };
+  autofillinputs = e => {
+    console.log('e' + e);
+    axios.get();
+  };
   render() {
     let data = [
       {
@@ -171,14 +171,20 @@ export default class NewPost extends Component {
           />
         </View>
         <View style={styles.inputContainer}>
-          <TextInput style={StyleSheet.inputs} 
-          placeholder="Search Spotify"
-          onChangeText={(letter) => this.searchSpotify(letter)}
+          <TextInput
+            style={StyleSheet.inputs}
+            placeholder='Search Spotify'
+            onChangeText={letter => this.searchSpotify(letter)}
           />
 
-          <Text onPress={() => {this.autofillinputs(this.state.songs)}}>{this.state.songs}</Text>
+          <Text
+            onPress={() => {
+              this.autofillinputs(this.state.songs);
+            }}
+          >
+            {this.state.songs}
+          </Text>
         </View>
-        
 
         {/* <View style={styles.inputContainer}>
                     <TextInput style={StyleSheet.inputs}

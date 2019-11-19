@@ -14,14 +14,14 @@ import {
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import * as Font from 'expo-font';
-import UserPage from '../screens/UserPage'
+import UserPage from '../screens/UserPage';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Signup from './SignUp';
-import { faSpotify } from '@fortawesome/free-brands-svg-icons'
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { ActivityIndicator } from 'react-native';
-import AntIcon from "react-native-vector-icons/AntDesign";
+import AntIcon from 'react-native-vector-icons/AntDesign';
 import {
   faRecordVinyl,
   faUserCircle,
@@ -73,19 +73,19 @@ export default class Home extends Component {
         return res.json();
       })
       .then(response => {
-        this.setState({ posts: response,
-        refreshing: false });
+        this.setState({ posts: response, refreshing: false });
       });
   };
   onRefresh() {
-    this.setState({posts: []})
-    return fetch('http://localhost:8000/api/posts/').then(res => {
-      return res.json();
-    })
-    .then(response => {
-      this.setState({ posts: response,
-      refreshing: false });
-  })}
+    this.setState({ posts: [] });
+    return fetch('http://localhost:8000/api/posts/')
+      .then(res => {
+        return res.json();
+      })
+      .then(response => {
+        this.setState({ posts: response, refreshing: false });
+      });
+  }
   deletePost = post => {
     return axios
       .delete(`http://localhost:8000/api/posts/${post}/`, {
@@ -103,7 +103,6 @@ export default class Home extends Component {
         });
       });
   };
-  
 
   render() {
     this.state.posts.map(item => {
@@ -167,16 +166,17 @@ export default class Home extends Component {
 
     return (
       <View style={{ flex: 1, paddingTop: 20, backgroundColor: '#fbf7f5' }}>
-      
         <Image source={sounddump} style={styles.sounddump} />
-        
+
         <View style={styles.nav}>
-        
-        <FontAwesomeIcon
+          <FontAwesomeIcon
             icon={faSpotify}
             color={'rgb(231, 210, 141)'}
             size={32}
-            onPress={() => {this.props.navigation.navigate('SearchPage')}}/>
+            onPress={() => {
+              this.props.navigation.navigate('SearchPage');
+            }}
+          />
           <FontAwesomeIcon
             icon={faPlusSquare}
             color={'rgb(231, 210, 141)'}
@@ -185,20 +185,25 @@ export default class Home extends Component {
               this.props.navigation.navigate('NewPost');
             }}
           />
-          <TouchableOpacity onPress={() => {
-            this.props.navigation.navigate('UserPage');
-          }}>
-          <FontAwesomeIcon icon={faUserAstronaut}
-          color={'rgb(231, 210, 141)'}
-          size={28} /></TouchableOpacity>
-
-          
-          
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('UserPage');
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faUserAstronaut}
+              color={'rgb(231, 210, 141)'}
+              size={28}
+            />
+          </TouchableOpacity>
         </View>
         <FlatList
           data={this.state.posts}
           refreshControl={
-            <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)}/>
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh.bind(this)}
+            />
           }
           keyExtractor={({ item }, index) => index.toString()}
           renderItem={({ item }) => (
@@ -242,9 +247,7 @@ export default class Home extends Component {
                 {/* <Text style={styles.vibe}>{item.vibe}</Text> */}
               </View>
 
-              <View style={styles.buttons}>
-                
-              </View>
+              <View style={styles.buttons}></View>
             </View>
           )}
         />
@@ -303,7 +306,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: '#fbf7f5',
     paddingBottom: 18
-    
   },
   signupbutton: {
     flex: 1,
@@ -311,7 +313,7 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   vinylStyle: {
-    width:400,
+    width: 400,
     height: 400,
     marginLeft: 7,
     shadowColor: 'grey',

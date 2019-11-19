@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import axios from 'axios';
-import spotifyCredentials from '../secrets'
+import spotifyCredentials from '../secrets';
 
 export default class PostFromSpotify extends Component {
   constructor(props) {
@@ -26,7 +26,6 @@ export default class PostFromSpotify extends Component {
     };
   }
   componentDidMount = async () => {
-
     let spotToken = await AsyncStorage.getItem('spottoken');
     const token = await AsyncStorage.getItem('token');
 
@@ -49,7 +48,6 @@ export default class PostFromSpotify extends Component {
       });
   };
   handleSubmit = event => {
-    
     event.preventDefault();
     return axios
       .post(
@@ -105,7 +103,7 @@ export default class PostFromSpotify extends Component {
                 paddingBottom: 0
               }}
             />
-            </Text>
+          </Text>
 
           <View style={styles.inputContainer}>
             <Dropdown
@@ -120,7 +118,6 @@ export default class PostFromSpotify extends Component {
             styles={{ marginBottom: 200 }}
             onPress={event => this.handleSubmit(event)}
           />
-        
         </View>
       </View>
     );
