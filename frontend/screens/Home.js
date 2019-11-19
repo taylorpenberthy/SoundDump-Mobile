@@ -156,17 +156,6 @@ export default class Home extends Component {
 
     return (
       <View style={{ flex: 1, paddingTop: 20, backgroundColor: '#fbf7f5' }}>
-       {/* <Button title='seeerch'  */}
-        {/* <View style={styles.signup}> */}
-        {/* <FontAwesomeIcon icon={faUserPlus} color={'rgb(231, 210, 141)'}/> */}
-        {/* <Button
-          title='Sign Up'
-          style={styles.signupbutton}
-          onPress={() => this.props.navigation.navigate('SignUp')}
-        /></View> */}
-
-       
-        {/* <View style={styles.maintitle}> */}
       
         <Image source={sounddump} style={styles.sounddump} />
         

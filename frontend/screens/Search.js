@@ -81,19 +81,13 @@ export default class Search extends Component {
             {this.state.userInfo.id}
           </Text>
           </View>
-          {/* <Text style={styles.userInfoText}>
-            Email:
-          </Text>
-          <Text style={styles.userInfoText}>
-            {this.state.userInfo.email}
-          </Text> */}
         </View>
        
         <Button title='Press me to authenticate!' onPress={() => this.handleSubmit()}/>
 
         <TouchableOpacity style={styles.sounddumpenter} onPress={() => this.props.navigation.navigate('Home')} >
           <Text style={styles.sounddumpenter}>Enter SoundDump</Text>
-        <Image source={vinyl} style={styles.sounddump} />
+        <Image source={vinyl} style={{width: 20, height: 20}} />
         </TouchableOpacity>
         
       </View>
@@ -171,14 +165,14 @@ const styles = StyleSheet.create({
     },
     sounddumpenter: {
       flex: 1,
-      height: 100,
+      height: 200,
       flexDirection: 'row',
       justifyContent: 'center'
     },
-    sounddump: {
-      height: 20,
-      width: 20,
-      flex: 1,
+    // sounddump: {
+    //   height: 15,
+    //   width: 15,
+    //   flex: 1,
       
-    }
+    // }
   });
