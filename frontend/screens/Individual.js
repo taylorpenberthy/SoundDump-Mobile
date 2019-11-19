@@ -149,16 +149,15 @@ export default class Individual extends Component {
           title='Logout'
           onPress={() => this.handlelogout()}
         />
-        <TouchableOpacity
-          style={styles.sounddump}
-          onPress={() => {
-            this.props.navigation.navigate('Home');
-          }}
-        >
+       <TouchableOpacity
+            style={styles.sounddump}
+            onPress={() => {
+              this.props.navigation.navigate('Home');
+            }}
+          >
           <Image
             source={vinyl}
             style={styles.sounddump}
-            onPress={() => this.props.navigation.navigate('Home')}
           />
         </TouchableOpacity>
 
