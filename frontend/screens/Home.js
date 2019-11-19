@@ -18,6 +18,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Signup from './SignUp';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 import { ActivityIndicator } from 'react-native';
 import AntIcon from "react-native-vector-icons/AntDesign";
 import {
@@ -91,13 +92,7 @@ export default class Home extends Component {
         });
       });
   };
-  handlelogout = () => {
-    AsyncStorage.removeItem('token');
-    this.setState({
-      loggedIn: false
-    });
-    this.props.navigation.navigate('Login');
-  };
+  
 
   render() {
     this.state.posts.map(item => {
@@ -161,7 +156,7 @@ export default class Home extends Component {
 
     return (
       <View style={{ flex: 1, paddingTop: 20, backgroundColor: '#fbf7f5' }}>
-       
+       {/* <Button title='seeerch'  */}
         {/* <View style={styles.signup}> */}
         {/* <FontAwesomeIcon icon={faUserPlus} color={'rgb(231, 210, 141)'}/> */}
         {/* <Button
@@ -170,29 +165,24 @@ export default class Home extends Component {
           onPress={() => this.props.navigation.navigate('SignUp')}
         /></View> */}
 
-        {/* <Button style={styles.button} title="Logout"  onPress={() => this.handlelogout()}/> */}
+       
         {/* <View style={styles.maintitle}> */}
       
         <Image source={sounddump} style={styles.sounddump} />
         
         <View style={styles.nav}>
-          {/* <AntIcon name="adduser"  color={'rgb(231, 210, 141)'}
-            size={28} /> */}
-  
+        
         <FontAwesomeIcon
-            icon={faUserPlus}
+            icon={faSpotify}
             color={'rgb(231, 210, 141)'}
             size={32}
-            onPress={() => {
-              this.props.navigation.navigate('SignUp')
-            }}
-          />
+            onPress={() => {this.props.navigation.navigate('SearchPage')}}/>
           <FontAwesomeIcon
             icon={faPlusSquare}
             color={'rgb(231, 210, 141)'}
             size={28}
             onPress={() => {
-              this.props.navigation.navigate('PlayerScreen');
+              this.props.navigation.navigate('NewPost');
             }}
           />
           <TouchableOpacity onPress={() => {
@@ -307,10 +297,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginLeft: 6,
+    marginRight: 6,
     marginBottom: 15,
     alignItems: 'stretch',
     backgroundColor: '#fbf7f5',
-    paddingBottom: 15
+    paddingBottom: 18
     
   },
   signupbutton: {

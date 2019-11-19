@@ -58,6 +58,13 @@ export default class Individual extends Component {
         });
       });
   };
+  handlelogout = () => {
+    AsyncStorage.removeItem('token');
+    this.setState({
+      loggedIn: false
+    });
+    this.props.navigation.navigate('Login');
+  };
   deletePost = post => {
     return axios
       .delete(`http://localhost:8000/api/posts/${post}/`, {
@@ -114,16 +121,19 @@ export default class Individual extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fbf7f5' }}>
+           <Button style={styles.button} title="Logout"  onPress={() => this.handlelogout()}/>
         <TouchableOpacity style={styles.sounddump} onPress={() => this.props.navigation.navigate('Home')} >
         <Image source={vinyl} style={styles.sounddump} />
         </TouchableOpacity>
-        <View style={styles.songdeet}>
+     
+        
+
+        <View style={styles.post}>
         <Text style={styles.title}>{post.title}</Text>
 
-        <Text style={styles.artist}>{post.artist}</Text>
-        </View>
-        <View style={styles.post}>
-                  
+<Text style={styles.artist}>{post.title}
+
+{post.artist}</Text>
         
             <ImageBackground
                 source={require('../assets/vinyl.png')}
@@ -258,11 +268,8 @@ const styles = StyleSheet.create({
     },
     title:  {
       flex: 1,
-      height: 20,
-      zIndex: 6,
-  
-    //   backgroundColor: 'black',
-      // backgroundColor: 'rgb(253, 190, 219)',
+      marginBottom: 0,
+      height: 5,
       color: 'rgb(197, 139,211)',
       justifyContent: 'center',
       fontSize: 25,

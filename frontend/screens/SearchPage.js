@@ -8,14 +8,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   FormData,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from 'react-native';
 import qs from 'qs';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { ScrollView } from 'react-native-gesture-handler';
 import { Dropdown } from 'react-native-material-dropdown';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
+import PostFromSpotify from '../screens/PostFromSpotify'
 export default class NewPost extends Component {
   constructor() {
     super();
@@ -25,6 +28,8 @@ export default class NewPost extends Component {
       caption: '',
       vibe: '',
       artist: '',
+      search: '',
+      songs: [],
       token: AsyncStorage.getItem('token')
     };
   }
@@ -52,35 +57,54 @@ export default class NewPost extends Component {
           this.setState({ posts: response });
         });
     };
-    handleSubmit = e => {
-      console.log(this.state.author);
-      e.preventDefault();
-      let posts = this.state;
-      return axios
-        .post(
-          'http://localhost:8000/api/posts/',
-          {
-            title: this.state.title,
-            link: this.state.link,
-            caption: this.state.caption,
-            artist: this.state.artist,
-            vibe: this.state.vibe
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `JWT ${this.state.token}`
-            }
-          }
-        )
-        .then(res => {
-          console.log(res);
-          this.props.navigation.navigate('Home');
-        })
-        .catch(err => console.log(err));
-    };
-  };
-
+    handleSubmit = async(e) => {
+        e.preventDefault()
+        e = this.state.search
+        let spotToken = await AsyncStorage.getItem('spottoken')
+    
+        axios.get(`https://api.spotify.com/v1/search?q=${e}&type=track&limit=7`, {
+          headers: {
+            Authorization: `Bearer ${spotToken}`
+        }
+      }).then(res => {return res.data.tracks.items})
+      .then(response => {
+          this.setState({
+              songs: response
+          })
+          })
+          console.log('submit ' + response.name)
+      
+    
+    }
+  searchSpotify = async(search) => {
+    console.log('search' + search)
+    this.state.songs = []
+    let spotToken = await AsyncStorage.getItem('spottoken')
+    console.log('spt token' + spotToken)
+    axios.get(`https://api.spotify.com/v1/search?q=${search}&type=track&limit=7`, {
+          headers: {
+            Authorization: `Bearer ${spotToken}`
+        }
+      }).then(res => {return res.data.tracks.items})
+      .then(response => {
+          let arr = []
+          response.map(song=> {
+              
+            arr.push([song.name, song.id])
+            
+          })
+          this.setState({
+              songs: arr
+          })
+          console.log('state songs' + this.state.songs)
+       
+      })}
+  }
+  handlefill = (e) => {
+    console.log('handle fill' + e.target)
+    axios.get()
+  
+  }
   render() {
     let data = [
       {
@@ -99,60 +123,38 @@ export default class NewPost extends Component {
         value: 'upbeat'
       }
     ];
-    return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={StyleSheet.inputs}
-            placeholder='Title'
-            name='title'
-            onChangeText={text => this.setState({ title: text })}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={StyleSheet.inputs}
-            placeholder='Artist'
-            name='artist'
-            onChangeText={text => this.setState({ artist: text })}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={StyleSheet.inputs}
-            placeholder='Image'
-            name='link'
-            onChangeText={text => this.setState({ link: text })}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={StyleSheet.inputs}
-            placeholder='Link to Song'
-            name='caption'
-            onChangeText={text => this.setState({ caption: text })}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Dropdown
-            label='Vibe'
-            padding={50}
-            data={data}
-            onChangeText={text => this.setState({ vibe: text })}
-          />
-        </View>
 
-        {/* <View style={styles.inputContainer}>
-                    <TextInput style={StyleSheet.inputs}
-                    placeholder="Comments"
-                    name='comments'
-                    onChangeText={(text) => this.setState({comments: text})}/>
-               </View> */}
+    return (
+    <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <TextInput style={StyleSheet.inputs} 
+          placeholder="Search Spotify"
+          onChangeText={(letter) => this.setState({
+              search: letter})}
+          />
+        
+          
+        </View>
+        
         <Button
-          title='Post'
+          title='Search'
           style={styles.submitButtonText}
           onPress={event => handleSubmit(event)}
         />
+
+        {this.state.songs.map(song => {
+            console.log(song.artist)
+            return( 
+                <View style={styles.list}>
+                    <Text style={styles.results} onPress={() => {
+                       
+                        this.props.navigation.navigate('PostFromSpotify', {
+                            id: song.id
+                        })
+                        this.handlefill(song)}}><FontAwesomeIcon flex={1} flexDirection={'row'}icon={faPlusCircle} size={15} color={'#CB8589'}/> {song.name}<Text style={styles.title}>{song.artist}</Text></Text>
+                    </View>
+            )
+        })}
       </View>
     );
   }
@@ -164,6 +166,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fbf7f5'
+  },
+  results: {
+      color: '#CB8589',
+      fontSize: 15,
+      margin: 5,
   },
   input: {
     margin: 15,

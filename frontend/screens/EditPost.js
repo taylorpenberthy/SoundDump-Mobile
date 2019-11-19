@@ -85,12 +85,6 @@ export default class NewPost extends Component {
             onChangeText={text => this.setState({ caption: text })}
           />
         </View>
-        {/* <View style={styles.inputContainer}>
-                    <TextInput style={StyleSheet.inputs}
-                    placeholder="Comments"
-                    name='comments'
-                    onChangeText={(text) => this.setState({comments: text})}/>
-               </View> */}
         <Button
           title='Post'
           style={styles.submitButtonText}

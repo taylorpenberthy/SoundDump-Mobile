@@ -53,6 +53,7 @@ export default class LoginForm extends Component {
   render() {
     return (
       <View style={styles.container}>
+          
         <View style={styles.header}>
           <Image source={sounddump} style={styles.sounddump} />
         </View>
@@ -78,6 +79,7 @@ export default class LoginForm extends Component {
           style={styles.submitButtonText}
           onPress={() => this.handleSubmit()}
         />
+        <Button title='OR Login with Spotify' onPress={() => {this.props.navigation.navigate('Search')}}/>
         <Button
           title='Go to Signup'
           onPress={() => this.props.navigation.navigate('SignUp')}
