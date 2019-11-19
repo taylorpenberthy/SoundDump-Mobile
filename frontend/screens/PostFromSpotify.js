@@ -37,7 +37,7 @@ export default class PostFromSpotify extends Component {
         }
       })
       .then(res => {
-        console.log(res.data.album.artists);
+        console.log(res.data);
         this.setState({
           song_preview: res.data.preview_url,
           artist: res.data.album.artists[0].name,

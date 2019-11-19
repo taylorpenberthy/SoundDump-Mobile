@@ -243,10 +243,7 @@ export default class Home extends Component {
               </View>
 
               <View style={styles.buttons}>
-                {/* <Button color='rgb(131, 167, 222)' title="Delete" onPress={() => this.deletePost(item.pk)}/> */}
-
-                {/*            
-             <Button color='rgb(131, 167, 222)' title="Edit" onPress={() => this.props.navigation.navigate('Edit')}/> */}
+                
               </View>
             </View>
           )}
@@ -259,7 +256,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // fontFamily: 'shrikhand',
+
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'grey'
@@ -314,7 +311,7 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   vinylStyle: {
-    width: 400,
+    width:400,
     height: 400,
     marginLeft: 7,
     shadowColor: 'grey',

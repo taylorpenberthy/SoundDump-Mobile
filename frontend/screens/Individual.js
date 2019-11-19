@@ -125,8 +125,8 @@ export default class Individual extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#fbf7f5' }}>
            <Button style={styles.button} title="Logout"  onPress={() => this.handlelogout()}/>
-        <TouchableOpacity style={styles.sounddump} onPress={() => this.props.navigation.navigate('Home')} >
-        <Image source={vinyl} style={styles.sounddump} />
+        <TouchableOpacity style={styles.sounddump} onPress={() => {this.props.navigation.navigate('Home')}}>
+        <Image source={vinyl} style={styles.sounddump} onPress={() => this.props.navigation.navigate('Home')}/>
         </TouchableOpacity>
      
         
@@ -173,7 +173,7 @@ export default class Individual extends Component {
                   color={'rgb(131, 167, 222)'}
                 />   </Text> 
                 
-                 {/* <Text style={styles.vibe}>{post.vibe}</Text> */}
+                 <Text style={styles.vibe}>{post.vibe}</Text>
             
     
       </View>
@@ -287,7 +287,6 @@ const styles = StyleSheet.create({
       top: 0,
       textAlign: 'left',
       flex: 1,
-      flexDirection: 'row',
       marginLeft: 0,
       marginRight: 250,
       paddingRight: 200
@@ -304,7 +303,6 @@ const styles = StyleSheet.create({
         height: 40,
         width: 40,
         marginLeft: 92,
-        flexDirection: 'row',
         flex: 1,
         resizeMode: 'contain',
     
