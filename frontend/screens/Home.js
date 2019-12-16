@@ -23,17 +23,12 @@ import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { ActivityIndicator } from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {
-  faRecordVinyl,
-  faUserCircle,
   faCloudRain,
   faUserAstronaut,
   faPlaneDeparture,
-  faPlusSquare,
-  faDumpster,
-  faUserPlus,
+  
   faCoffee,
   faCocktail,
-  faCloudShowersHeavy,
   faFireAlt,
   faLaughBeam,
   faTrash
@@ -177,14 +172,7 @@ export default class Home extends Component {
               this.props.navigation.navigate('SearchPage');
             }}
           />
-          <FontAwesomeIcon
-            icon={faPlusSquare}
-            color={'rgb(231, 210, 141)'}
-            size={28}
-            onPress={() => {
-              this.props.navigation.navigate('NewPost');
-            }}
-          />
+          
           <TouchableOpacity
             onPress={() => {
               this.props.navigation.navigate('UserPage');
@@ -299,11 +287,11 @@ const styles = StyleSheet.create({
   nav: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: 6,
-    marginRight: 6,
+    justifyContent: 'center',
+    marginLeft: 40,
+    marginRight: 40,
     marginBottom: 15,
-    alignItems: 'stretch',
+    alignItems: 'center',
     backgroundColor: '#fbf7f5',
     paddingBottom: 18
   },
@@ -330,7 +318,6 @@ const styles = StyleSheet.create({
   buttons: {
     flex: 1,
     flexDirection: 'row',
-    // fontFamily: 'shrikhand',
     color: 'rgb(197, 139, 211)'
   },
   userstyle: {
@@ -343,11 +330,9 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    // backgroundColor: 'rgb(253, 190, 219)',
     color: 'rgb(197, 139,211)',
     justifyContent: 'center',
     fontSize: 20,
-    // fontFamily: 'shrikhand',
     textAlign: 'center',
     margin: 10
   },
