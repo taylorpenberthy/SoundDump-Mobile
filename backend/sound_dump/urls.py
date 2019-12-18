@@ -30,5 +30,3 @@ urlpatterns = [
     # path('after-sign-in/', views.after_sign_in, name='after-sign-in'),
 ]
 
-# client secret: rdAZzZCrRQrJiOzQDM3vE9EyReFihPtvMOcpcvly5RUOKmx4P7QB747S0Kab7NIadjX1Xd31uOeiLwYyXwDoaIMJ7wh9Wuh7ZMPMeZDQqGn6AHwt8Bvla7Aa0CtxVtZi
-# client ID: LCa7LN2mJiLdRhK9E6lI6D77widKsDNAfxbYFmQc
