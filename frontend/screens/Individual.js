@@ -13,7 +13,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import Home from '../screens/Home';
-import Edit from '../screens/Edit';
+
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faRecordVinyl,
@@ -31,6 +31,7 @@ import {
 import * as Font from 'expo-font';
 import sounddump from '../assets/sounddump.png';
 import vinyl from '../assets/vinyl.png';
+let url = 'https://sound-backend.herokuapp.com/api/posts/'
 export default class Individual extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +45,7 @@ export default class Individual extends Component {
     const token = await AsyncStorage.getItem('token');
     console.log('this is incomp' + this.state.post.id);
     this.state.token = token;
-    return fetch(`http://localhost:8000/api/posts/${this.state.post.id}`, {
+    return fetch(`${url}${this.state.post.id}`, {
       headers: {
         Authorization: `JWT ${this.state.token}`
       }
@@ -68,7 +69,7 @@ export default class Individual extends Component {
   };
   deletePost = post => {
     return axios
-      .delete(`http://localhost:8000/api/posts/${post}/`, {
+      .delete(`${url}${post}/`, {
         headers: {
           Authorization: `JWT ${this.state.token}`
         }
@@ -233,8 +234,8 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   vinylStyle: {
-    width: 400,
-    height: 400,
+    width: 360,
+    height: 360,
     marginLeft: 7,
     marginTop: 0,
     paddingTop: 0,
@@ -306,17 +307,17 @@ const styles = StyleSheet.create({
     paddingRight: 200
   },
   album: {
-    width: 250,
-    height: 250,
-    borderRadius: 250 / 2,
-    marginTop: 70,
+    width: 210,
+    height: 210,
+    borderRadius: 210 / 2,
+    marginTop: 80,
     marginLeft: 75,
     marginRight: 100
   },
   sounddump: {
     height: 40,
     width: 40,
-    marginLeft: 92,
+    marginLeft: 82,
     flex: 1,
     resizeMode: 'contain'
 

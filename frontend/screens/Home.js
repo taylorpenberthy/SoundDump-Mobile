@@ -38,7 +38,7 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FontAwesome } from '@expo/vector-icons';
-
+let url = 'https://sound-backend.herokuapp.com/api/posts/'
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -63,7 +63,7 @@ export default class Home extends Component {
         fontsLoaded: true
       });
     });
-    return fetch('http://localhost:8000/api/posts/')
+    return fetch(url)
       .then(res => {
         return res.json();
       })
@@ -73,7 +73,7 @@ export default class Home extends Component {
   };
   onRefresh() {
     this.setState({ posts: [] });
-    return fetch('http://localhost:8000/api/posts/')
+    return fetch(url)
       .then(res => {
         return res.json();
       })
@@ -83,7 +83,7 @@ export default class Home extends Component {
   }
   deletePost = post => {
     return axios
-      .delete(`http://localhost:8000/api/posts/${post}/`, {
+      .delete(`${url}${post}/`, {
         headers: {
           Authorization: `JWT ${this.state.token}`
         }
@@ -168,6 +168,7 @@ export default class Home extends Component {
             icon={faSpotify}
             color={'rgb(231, 210, 141)'}
             size={32}
+            style={styles.navIcons}
             onPress={() => {
               this.props.navigation.navigate('SearchPage');
             }}
@@ -177,6 +178,7 @@ export default class Home extends Component {
             onPress={() => {
               this.props.navigation.navigate('UserPage');
             }}
+            style={styles.navIcons}
           >
             <FontAwesomeIcon
               icon={faUserAstronaut}
@@ -287,13 +289,20 @@ const styles = StyleSheet.create({
   nav: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    marginLeft: 40,
-    marginRight: 40,
-    marginBottom: 15,
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+    marginBottom: 15,
+    width: 400,
+    marginLeft: 150,
+    marginRight: 150,
     backgroundColor: '#fbf7f5',
     paddingBottom: 18
+  },
+  navIcons: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    padding: 10
   },
   signupbutton: {
     flex: 1,
@@ -301,8 +310,8 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   vinylStyle: {
-    width: 400,
-    height: 400,
+    width: 360,
+    height: 360,
     marginLeft: 7,
     shadowColor: 'grey',
     shadowOpacity: 0.6,
@@ -345,10 +354,10 @@ const styles = StyleSheet.create({
     paddingRight: 200
   },
   album: {
-    width: 250,
-    height: 250,
-    borderRadius: 250 / 2,
-    marginTop: 70,
+    width: 210,
+    height: 210,
+    borderRadius: 210 / 2,
+    marginTop: 75,
     marginLeft: 75,
     marginRight: 100
   },
@@ -358,7 +367,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 30,
+    marginLeft: 25,
     marginRight: 50,
     paddingBottom: 50
   }

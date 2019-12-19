@@ -24,7 +24,7 @@ export default class LoginForm extends Component {
   handleSubmit = () => {
     return axios
       .post(
-        'http://localhost:8000/api/auth/users/',
+        'sound-backend.herokuapp.com/api/auth/users/',
         {
           username: this.state.username,
           password: this.state.password

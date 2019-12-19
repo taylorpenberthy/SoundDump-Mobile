@@ -22,7 +22,7 @@ export default class Author extends Component {
   componentDidMount = async () => {
     const token = await AsyncStorage.getItem('token');
     axios
-      .get('http://localhost:8000/api/auth/current_user/', {
+      .get('sound-backend.herokuapp.com/api/auth/current_user/', {
         headers: {
           Authorization: `JWT ${token}`,
           'Content-Type': 'application/json'

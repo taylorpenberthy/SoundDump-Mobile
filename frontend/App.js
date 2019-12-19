@@ -4,8 +4,7 @@ import { createBottomTabNavigator}from 'react-navigation-tabs'
 import {createAppContainer} from 'react-navigation'
 import HomeScreen from './screens/Home'
 import {AsyncStorage} from 'react-native';
-import NewPost from './screens/NewPost'
-import EditPost from './screens/Edit'
+
 import AppContainer from './navigation'
 import LoginForm from './screens/LoginForm'
 export default class App extends Component {

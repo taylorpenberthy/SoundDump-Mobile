@@ -19,6 +19,7 @@ django-oauth-toolkit = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"

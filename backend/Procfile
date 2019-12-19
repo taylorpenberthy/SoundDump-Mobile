@@ -1,1 +1,1 @@
-web: gunicorn sound_dump.wsgi --log-file -
+web gunicorn sound_dump.wsgi:application --log-file - 

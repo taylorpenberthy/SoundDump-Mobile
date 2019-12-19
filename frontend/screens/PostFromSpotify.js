@@ -51,7 +51,7 @@ export default class PostFromSpotify extends Component {
     event.preventDefault();
     return axios
       .post(
-        'http://localhost:8000/api/posts/',
+        'https://sound-backend.herokuapp.com/api/posts/',
         {
           title: this.state.title,
           link: this.state.image,

@@ -36,7 +36,7 @@ export default class NewPost extends Component {
   componentDidMount = async () => {
     const token = await AsyncStorage.getItem('token');
     this.state.token = token;
-    fetch('http://http://localhost:8000/api/auth/current_user/', {
+    fetch('sound-backend.herokuapp.com/api/auth/current_user/', {
       headers: {
         Authorization: `JWT ${this.state.token}`
       }
@@ -49,7 +49,7 @@ export default class NewPost extends Component {
     });
     refreshList = () => {
       axios
-        .get('http://localhost:8000/api/posts/')
+        .get('https://sound-backend.herokuapp.com/api/posts/')
         .then(res => {
           return res.json();
         })
