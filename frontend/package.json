@@ -25,7 +25,7 @@
     "expo-facebook": "^7.0.0",
     "expokit": "^35.0.3",
     "formik": "^2.0.3",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-iframe": "^1.8.0",
